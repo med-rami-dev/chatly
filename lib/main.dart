@@ -1,8 +1,9 @@
 import 'package:chatly/firebase_options.dart';
-import 'package:chatly/pages/chat_page.dart';
-import 'package:chatly/pages/cubit/login_cubit/login_cubit.dart';
-import 'package:chatly/pages/login_page.dart';
-import 'package:chatly/pages/resgister_page.dart';
+import 'package:chatly/presentation/Screens/chat_page.dart';
+import 'package:chatly/presentation/cubit/login%20cubit/login_cubit.dart';
+import 'package:chatly/presentation/Screens/login_page.dart';
+import 'package:chatly/presentation/Screens/register_page.dart';
+import 'package:chatly/presentation/cubit/register%20cubit/register_cubit.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -20,13 +21,22 @@ class ScholarChat extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (context) => LoginCubitCubit(),
+    //* This is to use Multi Bloc Provider to provide the "LoginCubit" and "RegisterCubit" and "ChatCubit" to the entire app
+
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider<LoginCubit>(
+          create: (context) => LoginCubit(),
+        ),
+        BlocProvider<RegisterCubit>(
+          create: (context) => RegisterCubit(),
+        ),
+      ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
         routes: {
-          LoginPage.id: (context) => const LoginPage(),
-          RegisterPage.id: (context) => const RegisterPage(),
+          LoginPage.id: (context) => LoginPage(),
+          Navigate.id: (context) => Navigate(),
           ChatPage.id: (context) => ChatPage()
         },
         initialRoute: LoginPage.id,

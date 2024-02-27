@@ -1,6 +1,6 @@
 import 'package:chatly/constants.dart';
 import 'package:chatly/models/message.dart';
-import 'package:chatly/widgets/chat_buble.dart';
+import 'package:chatly/presentation/widgets/chat_buble.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
