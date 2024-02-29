@@ -1,5 +1,6 @@
 import 'package:chatly/firebase_options.dart';
 import 'package:chatly/presentation/Screens/chat_page.dart';
+import 'package:chatly/presentation/cubit/chat%20cubit/chat_cubit.dart';
 import 'package:chatly/presentation/cubit/login%20cubit/login_cubit.dart';
 import 'package:chatly/presentation/Screens/login_page.dart';
 import 'package:chatly/presentation/Screens/register_page.dart';
@@ -22,7 +23,6 @@ class ScholarChat extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     //* This is to use Multi Bloc Provider to provide the "LoginCubit" and "RegisterCubit" and "ChatCubit" to the entire app
-
     return MultiBlocProvider(
       providers: [
         BlocProvider<LoginCubit>(
@@ -31,12 +31,15 @@ class ScholarChat extends StatelessWidget {
         BlocProvider<RegisterCubit>(
           create: (context) => RegisterCubit(),
         ),
+        BlocProvider<ChatCubit>(
+          create: (context) => ChatCubit(),
+        ),
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
         routes: {
           LoginPage.id: (context) => LoginPage(),
-          Navigate.id: (context) => Navigate(),
+          RegisterPage.id: (context) => RegisterPage(),
           ChatPage.id: (context) => ChatPage()
         },
         initialRoute: LoginPage.id,

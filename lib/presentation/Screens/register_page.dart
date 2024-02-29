@@ -1,6 +1,7 @@
 import 'package:chatly/constants.dart';
 import 'package:chatly/helper/show_snack_bar.dart';
 import 'package:chatly/presentation/Screens/chat_page.dart';
+import 'package:chatly/presentation/cubit/chat%20cubit/chat_cubit.dart';
 import 'package:chatly/presentation/cubit/register%20cubit/register_cubit.dart';
 import 'package:chatly/presentation/widgets/custom_button.dart';
 import 'package:chatly/presentation/widgets/custom_text_field.dart';
@@ -8,7 +9,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
 
-class Navigate extends StatelessWidget {
+class RegisterPage extends StatelessWidget {
   //? This is For the Register Page Id to be used in the main.dart file To Navigate to this page
   static String id = 'RegisterPage';
   //* This is for the Loading State of the Register Page
@@ -17,7 +18,7 @@ class Navigate extends StatelessWidget {
   String? email, password;
   // This is for the Form Key to be used in the Register Page
   GlobalKey<FormState> formKey = GlobalKey();
-  Navigate({super.key});
+  RegisterPage({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -27,6 +28,7 @@ class Navigate extends StatelessWidget {
           isLoading = true;
         } else if (state is RegisterSuccess) {
           isLoading = false;
+          BlocProvider.of<ChatCubit>(context).getMessages();
           Navigator.pushNamed(context, ChatPage.id);
         } else if (state is RegisterFailure) {
           isLoading = false;

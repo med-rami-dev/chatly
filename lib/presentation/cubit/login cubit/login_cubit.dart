@@ -24,4 +24,20 @@ class LoginCubit extends Cubit<LoginCubitState> {
       emit(LoginCubitFailed(errorCode: 'Something went wrong'));
     }
   }
+
+  Future<void> logoutUser() async {
+    await FirebaseAuth.instance.signOut();
+  }
+
+  Future<void> loginAsGuest() async {
+    try {
+      emit(LoginCubitLoading());
+      final user = await FirebaseAuth.instance.signInAnonymously();
+      emit(LoginCubitSuccess());
+    } on FirebaseAuthException catch (e) {
+      emit(LoginCubitFailed(errorCode: e.code));
+    } catch (e) {
+      emit(LoginCubitFailed(errorCode: 'Something went wrong'));
+    }
+  }
 }

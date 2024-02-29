@@ -1,10 +1,11 @@
 import 'package:chatly/constants.dart';
 import 'package:chatly/helper/show_snack_bar.dart';
+import 'package:chatly/presentation/cubit/chat%20cubit/chat_cubit.dart';
 import 'package:chatly/presentation/cubit/login%20cubit/login_cubit.dart';
 import 'package:chatly/presentation/Screens/register_page.dart';
 import 'package:chatly/presentation/widgets/custom_button.dart';
 import 'package:chatly/presentation/widgets/custom_text_field.dart';
-import 'package:firebase_auth/firebase_auth.dart';
+import 'package:chatly/presentation/widgets/gust_login.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
@@ -29,6 +30,7 @@ class LoginPage extends StatelessWidget {
         isLoading = true;
       } else if (state is LoginCubitSuccess) {
         isLoading = false;
+        BlocProvider.of<ChatCubit>(context).getMessages();
         Navigator.pushNamed(context, ChatPage.id);
       } else if (state is LoginCubitFailed) {
         isLoading = false;
@@ -126,7 +128,7 @@ class LoginPage extends StatelessWidget {
                       ),
                       GestureDetector(
                         onTap: () {
-                          Navigator.pushNamed(context, Navigate.id);
+                          Navigator.pushNamed(context, RegisterPage.id);
                         },
                         child: const Text(
                           '  Register',
@@ -136,6 +138,9 @@ class LoginPage extends StatelessWidget {
                         ),
                       ),
                     ],
+                  ),
+                  const SizedBox(
+                    height: 25,
                   ),
                 ],
               ),
