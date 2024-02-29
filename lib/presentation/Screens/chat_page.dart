@@ -1,7 +1,7 @@
 import 'package:chatly/constants.dart';
 import 'package:chatly/models/message.dart';
+import 'package:chatly/presentation/cubit/auth/auth_cubit.dart';
 import 'package:chatly/presentation/cubit/chat%20cubit/chat_cubit.dart';
-import 'package:chatly/presentation/cubit/login%20cubit/login_cubit.dart';
 import 'package:chatly/presentation/widgets/chat_buble.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
@@ -26,7 +26,7 @@ class ChatPage extends StatelessWidget {
         actions: [
           IconButton(
             onPressed: () {
-              BlocProvider.of<LoginCubit>(context).logoutUser();
+              BlocProvider.of<AuthCubit>(context).logoutUser();
               Navigator.pop(context);
             },
             icon: const Icon(

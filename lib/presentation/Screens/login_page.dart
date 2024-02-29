@@ -1,17 +1,17 @@
 import 'package:chatly/constants.dart';
 import 'package:chatly/helper/show_snack_bar.dart';
+import 'package:chatly/presentation/cubit/auth/auth_cubit.dart';
 import 'package:chatly/presentation/cubit/chat%20cubit/chat_cubit.dart';
-import 'package:chatly/presentation/cubit/login%20cubit/login_cubit.dart';
 import 'package:chatly/presentation/Screens/register_page.dart';
 import 'package:chatly/presentation/widgets/custom_button.dart';
 import 'package:chatly/presentation/widgets/custom_text_field.dart';
-import 'package:chatly/presentation/widgets/gust_login.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
 
 import 'chat_page.dart';
 
+// ignore: must_be_immutable
 class LoginPage extends StatelessWidget {
   static String id = 'login page';
 
@@ -24,8 +24,7 @@ class LoginPage extends StatelessWidget {
   LoginPage({super.key});
   @override
   Widget build(BuildContext context) {
-    return BlocConsumer<LoginCubit, LoginCubitState>(
-        listener: (context, state) {
+    return BlocConsumer<AuthCubit, AuthState>(listener: (context, state) {
       if (state is LoginCubitLoading) {
         isLoading = true;
       } else if (state is LoginCubitSuccess) {
@@ -106,7 +105,7 @@ class LoginPage extends StatelessWidget {
                   CustomButton(
                     onTap: () async {
                       if (formKey.currentState!.validate()) {
-                        BlocProvider.of<LoginCubit>(context).loginUser(
+                        BlocProvider.of<AuthCubit>(context).loginUser(
                           email: email!,
                           password: password!,
                         );

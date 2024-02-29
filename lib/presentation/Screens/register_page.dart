@@ -1,14 +1,15 @@
 import 'package:chatly/constants.dart';
 import 'package:chatly/helper/show_snack_bar.dart';
 import 'package:chatly/presentation/Screens/chat_page.dart';
+import 'package:chatly/presentation/cubit/auth/auth_cubit.dart';
 import 'package:chatly/presentation/cubit/chat%20cubit/chat_cubit.dart';
-import 'package:chatly/presentation/cubit/register%20cubit/register_cubit.dart';
 import 'package:chatly/presentation/widgets/custom_button.dart';
 import 'package:chatly/presentation/widgets/custom_text_field.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
 
+// ignore: must_be_immutable
 class RegisterPage extends StatelessWidget {
   //? This is For the Register Page Id to be used in the main.dart file To Navigate to this page
   static String id = 'RegisterPage';
@@ -22,7 +23,7 @@ class RegisterPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocConsumer<RegisterCubit, RegisterState>(
+    return BlocConsumer<AuthCubit, AuthState>(
       listener: (context, state) {
         if (state is RegisterLoading) {
           isLoading = true;
@@ -104,7 +105,7 @@ class RegisterPage extends StatelessWidget {
                     CustomButton(
                       onTap: () async {
                         if (formKey.currentState!.validate()) {
-                          BlocProvider.of<RegisterCubit>(context)
+                          BlocProvider.of<AuthCubit>(context)
                               .registerUser(email: email!, password: password);
                         } else {}
                       },

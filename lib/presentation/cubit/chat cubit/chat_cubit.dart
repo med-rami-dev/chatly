@@ -2,7 +2,6 @@ import 'package:chatly/constants.dart';
 import 'package:chatly/models/message.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-
 part 'chat_state.dart';
 
 class ChatCubit extends Cubit<ChatState> {

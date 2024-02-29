@@ -1,10 +1,9 @@
 import 'package:chatly/firebase_options.dart';
 import 'package:chatly/presentation/Screens/chat_page.dart';
+import 'package:chatly/presentation/cubit/auth/auth_cubit.dart';
 import 'package:chatly/presentation/cubit/chat%20cubit/chat_cubit.dart';
-import 'package:chatly/presentation/cubit/login%20cubit/login_cubit.dart';
 import 'package:chatly/presentation/Screens/login_page.dart';
 import 'package:chatly/presentation/Screens/register_page.dart';
-import 'package:chatly/presentation/cubit/register%20cubit/register_cubit.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -25,11 +24,8 @@ class ScholarChat extends StatelessWidget {
     //* This is to use Multi Bloc Provider to provide the "LoginCubit" and "RegisterCubit" and "ChatCubit" to the entire app
     return MultiBlocProvider(
       providers: [
-        BlocProvider<LoginCubit>(
-          create: (context) => LoginCubit(),
-        ),
-        BlocProvider<RegisterCubit>(
-          create: (context) => RegisterCubit(),
+        BlocProvider<AuthCubit>(
+          create: (context) => AuthCubit(),
         ),
         BlocProvider<ChatCubit>(
           create: (context) => ChatCubit(),
